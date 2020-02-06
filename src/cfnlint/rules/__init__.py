@@ -87,6 +87,8 @@ class CloudFormationLintRule(object):
                 LOGGER.debug('Starting match function for rule %s at %s', self.id, start)
                 # pylint: disable=E1102
                 results = match_function(self, filename, cfn, *args, **kwargs)
+                if not results:
+                    LOGGER.info('Rule %s, %s: OK', self.id, self.shortdesc)
                 LOGGER.debug('Complete match function for rule %s at %s.  Ran in %s',
                              self.id, datetime.now(), datetime.now() - start)
                 LOGGER.debug('Results from rule %s are %s: ', self.id, results)
